@@ -168,7 +168,7 @@ export default function BackgroundSystem() {
 
       <iframe
         ref={iframeRef}
-        src="/bg_v13.html?v=13.1"
+        src={process.env.NODE_ENV === 'development' ? "/bg_v13.html?v=13.1" : "/bg_v13?v=13.1"}
         title="Background Engine"
         scrolling="no"
         allow="gyroscope"
