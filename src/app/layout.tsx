@@ -67,7 +67,7 @@ export const metadata: Metadata = {
     url: './',
     title: 'Ahmed Code Studio — Full Stack Web Developer',
     description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
-    images: [{ url: '/design1.desktop.webp', width: 1456, height: 816, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
+    images: [{ url: 'https://ahmed-code-studio.vercel.app/design1.desktop.webp', width: 1456, height: 816, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
     siteName: 'Ahmed Code Studio',
     locale: 'en_US',
   },
@@ -75,7 +75,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ahmed Code Studio — Full Stack Web Developer',
     description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
-    images: ['/design1.desktop.webp'],
+    images: ['https://ahmed-code-studio.vercel.app/design1.desktop.webp'],
     creator: '@ahmedchoudery',
   },
 };
