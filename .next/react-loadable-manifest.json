@@ -1,0 +1,21 @@
+{
+  "components\\ClientHome.tsx -> ./ContactHUD": {
+    "id": 6940,
+    "files": [
+      "static/chunks/927.94d7f7006b3a1a58.js",
+      "static/chunks/940.6ea5391ea2dcb8e8.js"
+    ]
+  },
+  "components\\ClientHome.tsx -> ./HUDSystemAlert": {
+    "id": 3853,
+    "files": [
+      "static/chunks/853.89a4545147eaaf36.js"
+    ]
+  },
+  "components\\ClientHome.tsx -> ./ProjectDetailDrawer": {
+    "id": 4134,
+    "files": [
+      "static/chunks/134.c5f18b87b9df4902.js"
+    ]
+  }
+}

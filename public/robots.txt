@@ -1,0 +1,33 @@
+# Allow all standard crawlers
+User-agent: *
+Allow: /
+Sitemap: https://ahmedchoudery.github.io/sitemap.xml
+
+# Explicitly Allow AI Search Engines and LLM Crawlers
+# This ensures your portfolio can be cited by ChatGPT, Perplexity, Google AI, etc.
+
+# OpenAI (ChatGPT)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic (Claude)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Google Gemini / AI Overviews
+User-agent: Google-Extended
+Allow: /
+
+# Microsoft Copilot (Bing)
+User-agent: Bingbot
+Allow: /
