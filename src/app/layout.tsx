@@ -41,16 +41,18 @@ const spaceMono = Space_Mono({
   display: 'swap'
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ahmed-code-studio.vercel.app';
+
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ahmedchoudery.github.io'),
-  title: 'Muhammad Ahmed Raza — Full Stack Web Developer',
-  description: 'Full Stack Developer specializing in MERN stack, React, Next.js, Node.js, and Three.js. Building scalable backends and high-performance frontend experiences.',
+  metadataBase: new URL(siteUrl),
+  title: 'Ahmed Code Studio — Full Stack Web Developer',
+  description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
   keywords: ['Muhammad Ahmed Raza', 'Full Stack Developer', 'MERN Stack', 'React Developer', 'Next.js', 'Node.js', 'Web Developer Gujrat', 'Portfolio'],
-  authors: [{ name: 'Muhammad Ahmed Raza', url: 'https://ahmedchoudery.github.io' }],
+  authors: [{ name: 'Muhammad Ahmed Raza', url: siteUrl }],
   creator: 'Muhammad Ahmed Raza',
   publisher: 'Muhammad Ahmed Raza',
   alternates: {
-    canonical: 'https://ahmedchoudery.github.io/',
+    canonical: './',
   },
   icons: {
     icon: '/favicon.svg',
@@ -62,18 +64,18 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://ahmedchoudery.github.io/',
-    title: 'Muhammad Ahmed Raza — Full Stack Web Developer',
-    description: 'Full Stack Developer specializing in MERN stack, React, Next.js, Node.js, and Three.js. Building scalable backends and high-performance frontend experiences.',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'Muhammad Ahmed Raza — Full Stack Web Developer' }],
-    siteName: 'Muhammad Ahmed Raza',
+    url: './',
+    title: 'Ahmed Code Studio — Full Stack Web Developer',
+    description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
+    images: [{ url: '/design1.desktop.webp', width: 1456, height: 816, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
+    siteName: 'Ahmed Code Studio',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Muhammad Ahmed Raza — Full Stack Web Developer',
-    description: 'Full Stack Developer specializing in MERN stack, React, Next.js, Node.js, and Three.js. Building scalable backends and high-performance frontend experiences.',
-    images: ['/og-image.jpg'],
+    title: 'Ahmed Code Studio — Full Stack Web Developer',
+    description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
+    images: ['/design1.desktop.webp'],
     creator: '@ahmedchoudery',
   },
 };
@@ -96,8 +98,8 @@ export default function RootLayout({
     "@type": "Person",
     "name": "Muhammad Ahmed Raza",
     "jobTitle": "Full Stack Web Developer",
-    "url": "https://ahmedchoudery.github.io/",
-    "image": "https://ahmedchoudery.github.io/og-image.jpg",
+    "url": siteUrl,
+    "image": `${siteUrl}/design1.desktop.webp`,
     "sameAs": [
       "https://github.com/ahmedchoudery",
       "https://www.linkedin.com/in/muhammad-ahmed-raza"

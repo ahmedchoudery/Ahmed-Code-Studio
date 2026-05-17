@@ -1,7 +1,7 @@
 # Allow all standard crawlers
 User-agent: *
 Allow: /
-Sitemap: https://ahmedchoudery.github.io/sitemap.xml
+Sitemap: https://ahmed-code-studio.vercel.app/sitemap.xml
 
 # Explicitly Allow AI Search Engines and LLM Crawlers
 # This ensures your portfolio can be cited by ChatGPT, Perplexity, Google AI, etc.
