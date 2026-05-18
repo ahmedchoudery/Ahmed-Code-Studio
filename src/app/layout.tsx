@@ -123,6 +123,23 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorantGaramond.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${syne.variable} ${spaceMono.variable}`} suppressHydrationWarning>
       <head>
+        {/* Absolute top of head: Crucial Open Graph Tags for Legacy Crawlers like WhatsApp */}
+        <title>Ahmed Code Studio - Full Stack Web Developer</title>
+        <meta name="description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
+        <meta property="og:title" content="Ahmed Code Studio - Full Stack Web Developer" />
+        <meta property="og:description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
+        <meta property="og:image" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
+        <meta property="og:image:secure_url" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:url" content="https://ahmed-code-studio.vercel.app" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Ahmed Code Studio - Full Stack Web Developer" />
+        <meta name="twitter:description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
+        <meta name="twitter:image" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
