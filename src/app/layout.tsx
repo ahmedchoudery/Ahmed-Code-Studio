@@ -51,9 +51,6 @@ export const metadata: Metadata = {
   authors: [{ name: 'Muhammad Ahmed Raza', url: siteUrl }],
   creator: 'Muhammad Ahmed Raza',
   publisher: 'Muhammad Ahmed Raza',
-  alternates: {
-    canonical: './',
-  },
   icons: {
     icon: '/favicon.svg',
   },
@@ -64,7 +61,6 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: './',
     title: 'Ahmed Code Studio — Full Stack Web Developer',
     description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
     images: [{ url: 'https://ahmed-code-studio.vercel.app/og-image.jpg', width: 1200, height: 630, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
