@@ -128,7 +128,7 @@ export default function ClientHome() {
             Gujrat, Pakistan — Open to work
           </div>
           <div className="status-copyright" style={{ opacity: 0.4, fontFamily: 'var(--f-mono)', fontSize: '0.65rem', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-            © 2025 Ahmed Code Studio
+            © 2026 Ahmed Code Studio
           </div>
         </div>
       </div>
