@@ -45,8 +45,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://ahmed-code-studio.v
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Ahmed Code Studio — Full Stack Web Developer',
-  description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
+  title: 'Ahmed Code Studio - Full Stack Web Developer',
+  description: 'Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan.',
   keywords: ['Muhammad Ahmed Raza', 'Full Stack Developer', 'MERN Stack', 'React Developer', 'Next.js', 'Node.js', 'Web Developer Gujrat', 'Portfolio'],
   authors: [{ name: 'Muhammad Ahmed Raza', url: siteUrl }],
   creator: 'Muhammad Ahmed Raza',
@@ -65,23 +65,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     url: 'https://ahmed-code-studio.vercel.app/',
-    title: 'Ahmed Code Studio — Full Stack Web Developer',
-    description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
+    title: 'Ahmed Code Studio - Full Stack Web Developer',
+    description: 'Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan.',
     images: [{ 
       url: 'https://ahmed-code-studio.vercel.app/og-preview.jpg', 
       secureUrl: 'https://ahmed-code-studio.vercel.app/og-preview.jpg',
       type: 'image/jpeg',
       width: 1200, 
       height: 630, 
-      alt: 'Ahmed Code Studio — Full Stack Web Developer' 
+      alt: 'Ahmed Code Studio - Full Stack Web Developer' 
     }],
     siteName: 'Ahmed Code Studio',
     locale: 'en_US',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ahmed Code Studio — Full Stack Web Developer',
-    description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
+    title: 'Ahmed Code Studio - Full Stack Web Developer',
+    description: 'Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan.',
     images: ['https://ahmed-code-studio.vercel.app/og-preview.jpg'],
     creator: '@ahmedchoudery',
   },
