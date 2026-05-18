@@ -19,6 +19,7 @@ const sanitize = (html: string, options?: Record<string, unknown>): string => {
 export function ProjectDetailDrawer() {
   const isOpen = useHUDStore(state => state.view === 'PROJECT_DETAILS');
   const toggleDetails = useHUDStore(state => state.toggleDetails);
+  const setView = useHUDStore(state => state.setView);
   const currentIndex = useHUDStore(state => state.currentIndex);
   const project = projects[currentIndex];
 
@@ -81,9 +82,9 @@ export function ProjectDetailDrawer() {
 
         {project.link && (
           <footer className="drawer-footer">
-            <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Explore Project Live
-            </a>
+            <button className="btn-primary" onClick={() => setView('CONTACT')}>
+              Hire Me
+            </button>
           </footer>
         )}
       </div>

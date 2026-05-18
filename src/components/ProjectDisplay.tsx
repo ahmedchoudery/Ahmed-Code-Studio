@@ -122,9 +122,21 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = React.memo(({ project, ind
           </a>
         )}
 
-        <button className="btn-ghost" onClick={() => setView('CONTACT')}>
-          Hire Me
-        </button>
+        {project.link ? (
+          <a 
+            href={project.link} 
+            target="_blank" 
+            rel="noopener noreferrer" 
+            className="btn-ghost"
+            style={{ textDecoration: 'none' }}
+          >
+            Explore Project Live
+          </a>
+        ) : (
+          <button className="btn-ghost" onClick={() => setView('CONTACT')}>
+            Hire Me
+          </button>
+        )}
       </div>
 
       {project.icons.length > 0 && (
