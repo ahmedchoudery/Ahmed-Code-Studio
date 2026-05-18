@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Ahmed Code Studio — Full Stack Web Developer',
     description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
-    images: [{ url: 'https://ahmed-code-studio.vercel.app/og-image.jpg', width: 1200, height: 630, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
+    images: [{ url: 'https://ahmed-code-studio.vercel.app/og-preview.jpg', width: 1200, height: 630, alt: 'Ahmed Code Studio — Full Stack Web Developer' }],
     siteName: 'Ahmed Code Studio',
     locale: 'en_US',
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Ahmed Code Studio — Full Stack Web Developer',
     description: 'Ahmed Code Studio — building premium web experiences with React, Next.js, Node.js, Three.js & GSAP. Full Stack Developer based in Pakistan.',
-    images: ['https://ahmed-code-studio.vercel.app/og-image.jpg'],
+    images: ['https://ahmed-code-studio.vercel.app/og-preview.jpg'],
     creator: '@ahmedchoudery',
   },
 };
@@ -95,7 +95,7 @@ export default function RootLayout({
     "name": "Muhammad Ahmed Raza",
     "jobTitle": "Full Stack Web Developer",
     "url": siteUrl,
-    "image": `${siteUrl}/og-image.jpg`,
+    "image": `${siteUrl}/og-preview.jpg`,
     "sameAs": [
       "https://github.com/ahmedchoudery",
       "https://www.linkedin.com/in/muhammad-ahmed-raza"
