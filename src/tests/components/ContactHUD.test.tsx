@@ -29,7 +29,7 @@ describe('ContactHUD Component', () => {
   it('renders the contact form when view is CONTACT', () => {
     render(<ContactHUD />);
     expect(screen.getByText(/Connect/i)).toBeInTheDocument();
-    expect(screen.getByLabelText(/\/\/ NAME/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/^NAME$/i)).toBeInTheDocument();
   });
 
   it('validates empty submissions via Zod schema', async () => {
@@ -39,9 +39,9 @@ describe('ContactHUD Component', () => {
     const fetchSpy = vi.spyOn(global, 'fetch');
 
     // Fill with invalid data
-    const nameInput = screen.getByLabelText(/\/\/ NAME/i);
-    const emailInput = screen.getByLabelText(/\/\/ EMAIL/i);
-    const messageInput = screen.getByLabelText(/\/\/ MESSAGE/i);
+    const nameInput = screen.getByLabelText(/^NAME$/i);
+    const emailInput = screen.getByLabelText(/^EMAIL$/i);
+    const messageInput = screen.getByLabelText(/^MESSAGE$/i);
 
     await user.type(nameInput, 'A');
     await user.type(emailInput, 'invalid');
@@ -50,7 +50,7 @@ describe('ContactHUD Component', () => {
     const submitBtn = screen.getByRole('button', { name: /INITIATE CONTACT/i });
     
     // Use fireEvent.submit directly on the form to bypass native HTML5 validation
-    fireEvent.submit(screen.getByLabelText(/\/\/ NAME/i).closest('form')!);
+    fireEvent.submit(screen.getByLabelText(/^NAME$/i).closest('form')!);
 
     expect(fetchSpy).not.toHaveBeenCalled();
 
@@ -68,9 +68,9 @@ describe('ContactHUD Component', () => {
       new Response(JSON.stringify({ success: true }))
     );
 
-    await user.type(screen.getByLabelText(/\/\/ NAME/i), 'Ahmed Raza');
-    await user.type(screen.getByLabelText(/\/\/ EMAIL/i), 'test@example.com');
-    await user.type(screen.getByLabelText(/\/\/ MESSAGE/i), 'This is a test message for the portfolio form.');
+    await user.type(screen.getByLabelText(/^NAME$/i), 'Ahmed Raza');
+    await user.type(screen.getByLabelText(/^EMAIL$/i), 'test@example.com');
+    await user.type(screen.getByLabelText(/^MESSAGE$/i), 'This is a test message for the portfolio form.');
 
     fireEvent.click(screen.getByRole('button', { name: /INITIATE CONTACT/i }));
 
@@ -88,9 +88,9 @@ describe('ContactHUD Component', () => {
       new Response(JSON.stringify({ success: false, message: 'Submission failed' }))
     );
 
-    await user.type(screen.getByLabelText(/\/\/ NAME/i), 'Test User');
-    await user.type(screen.getByLabelText(/\/\/ EMAIL/i), 'error@test.com');
-    await user.type(screen.getByLabelText(/\/\/ MESSAGE/i), 'Testing error handling in form submission.');
+    await user.type(screen.getByLabelText(/^NAME$/i), 'Test User');
+    await user.type(screen.getByLabelText(/^EMAIL$/i), 'error@test.com');
+    await user.type(screen.getByLabelText(/^MESSAGE$/i), 'Testing error handling in form submission.');
 
     fireEvent.click(screen.getByRole('button', { name: /INITIATE CONTACT/i }));
 

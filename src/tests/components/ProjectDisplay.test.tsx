@@ -49,9 +49,9 @@ describe('ProjectDisplay Component', () => {
     // Assert description parsing
     expect(screen.getByText('Test description HTML')).toBeInTheDocument();
 
-    // Assert buttons for non-personal project
+    // Assert buttons for non-personal project with a link
     expect(screen.getByRole('button', { name: /Explore Case Study/i })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: /Hire Me/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Explore Project Live/i })).toBeInTheDocument();
   });
 
   it('renders icons properly if present', () => {
