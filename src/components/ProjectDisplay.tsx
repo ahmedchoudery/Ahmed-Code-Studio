@@ -92,6 +92,11 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = React.memo(({ project, ind
       </div>
 
       <div className="hero-eyebrow" ref={eyebrowRef}>
+        {!isPersonal && (
+          <span className="project-badge">
+            Project# {index}
+          </span>
+        )}
         {project.subheadline}
       </div>
 
@@ -107,9 +112,25 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = React.memo(({ project, ind
 
       <div className="hero-cta" ref={ctaRef}>
         {!isPersonal ? (
-          <button className="btn-primary" onClick={toggleDetails}>
-            Explore Case Study <span className="arrow" aria-hidden="true">&#8594;</span>
-          </button>
+          project.isComingSoon ? (
+            <button className="btn-primary" onClick={() => setView('CONTACT')}>
+              Get in Touch <span className="arrow" aria-hidden="true">&#8594;</span>
+            </button>
+          ) : project.link ? (
+            <a 
+              href={project.link} 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="btn-primary"
+              style={{ textDecoration: 'none' }}
+            >
+              Explore Project Live <span className="arrow" aria-hidden="true">&#8594;</span>
+            </a>
+          ) : (
+            <button className="btn-primary" onClick={toggleDetails}>
+              Explore Case Study <span className="arrow" aria-hidden="true">&#8594;</span>
+            </button>
+          )
         ) : (
           <button className="btn-primary" onClick={toggleDetails}>
             Read My Story <span className="arrow" aria-hidden="true">&#8594;</span>
@@ -122,16 +143,16 @@ const ProjectDisplay: React.FC<ProjectDisplayProps> = React.memo(({ project, ind
           </a>
         )}
 
-        {project.link ? (
-          <a 
-            href={project.link} 
-            target="_blank" 
-            rel="noopener noreferrer" 
-            className="btn-ghost"
-            style={{ textDecoration: 'none' }}
-          >
-            Explore Project Live
-          </a>
+        {!isPersonal ? (
+          project.isComingSoon ? null : project.link ? (
+            <button className="btn-ghost" onClick={toggleDetails}>
+              Explore Case Study <span className="arrow" aria-hidden="true">&#8594;</span>
+            </button>
+          ) : (
+            <button className="btn-ghost" onClick={() => setView('CONTACT')}>
+              Hire Me
+            </button>
+          )
         ) : (
           <button className="btn-ghost" onClick={() => setView('CONTACT')}>
             Hire Me

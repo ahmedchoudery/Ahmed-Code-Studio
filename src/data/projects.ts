@@ -29,6 +29,7 @@ export interface Project {
   drawerSpecsTitle?: string;
   drawerSpecs?: Spec[];
   seoSchema?: Record<string, unknown>;
+  isComingSoon?: boolean;
 }
 
 export const projects: Project[] = [
@@ -76,5 +77,17 @@ export const projects: Project[] = [
       { label: "Security & State", value: "Features custom token-based admin authentication, protected API routes, and a synchronized locking mechanism to completely eliminate double-booking scenarios." },
       { label: "Cloud Deployment", value: "Hosted on Vercel utilizing a serverless architecture, optimized with aggressive caching strategies (Cache-Control: immutable) for instantaneous global asset delivery." }
     ]
+  },
+  {
+    headline: "More Projects",
+    subheadline: "COMING SOON",
+    description: "I am constantly engineering new digital experiences. My upcoming projects continue to push the boundaries of modern web architecture, spatial design, and seamless performance. Check back shortly for more enterprise-grade applications.",
+    icons: [],
+    specsTitle: "STATUS",
+    specs: [
+      { label: "Current Phase", value: "In Development", proficiency: 100 },
+      { label: "Focus Area", value: "Advanced Interactive UI", proficiency: 95 }
+    ],
+    isComingSoon: true
   }
 ];
