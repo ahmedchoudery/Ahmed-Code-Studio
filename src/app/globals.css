@@ -397,6 +397,8 @@ body {
   text-transform: uppercase;
   backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .hero-name {
