@@ -79,6 +79,34 @@ export const projects: Project[] = [
     ]
   },
   {
+    headline: "Stop & Shop",
+    subheadline: "Premium Editorial E-Commerce Store",
+    description: "A full-stack, bespoke e-commerce platform built for high-end clothing and fashion retail. It features responsive editorial layouts, Pakistan-optimized payment options, a slide-out cart drawer, and a secure real-time admin dashboard with Redis caching.",
+    fullDescription: "Stop & Shop is an enterprise-grade, full-stack e-commerce application modeled after luxury global fashion houses. It bridges a cinematic frontend featuring GSAP micro-interactions and hardware-accelerated 3D tilting product cards with a highly secure, automated administration dashboard and API layer.",
+    overviewTitle: "What is Stop & Shop?",
+    icons: [
+      { svg: githubIcon, url: "https://github.com/ahmedchoudery/Stop-Shop.git", name: "GitHub" }
+    ],
+    link: "https://stop-shop-gamma.vercel.app/",
+    sourceLink: "https://github.com/ahmedchoudery/Stop-Shop.git",
+    specsTitle: "PROJECT SPECS",
+    specs: [
+      { label: "Complexity", value: "High (MERN + Next.js)", proficiency: 95 },
+      { label: "Database", value: "MongoDB (Mongoose)", proficiency: 90 },
+      { label: "Caching", value: "Redis Cache Layer", proficiency: 85 },
+      { label: "Animations", value: "GSAP & Framer Motion", proficiency: 92 }
+    ],
+    drawerSpecsTitle: "Technical Specifications & Architecture",
+    drawerSpecs: [
+      { label: "Frontend Framework", value: "Built using Next.js 14 (App Router) and React 18 for seamless hybrid rendering and SEO optimization." },
+      { label: "Backend Architecture", value: "Next.js API Route Handlers handling transaction logic, JWT authentication via httpOnly secure cookies, and Zod input validation." },
+      { label: "Database & Caching", value: "MongoDB for flexible catalog structure, paired with a Redis caching layer for rapid stats compilation and catalog lookups." },
+      { label: "Checkout & Payments", value: "A specialized 2-column local checkout flow with profile autofill, real-time stock deduction, and live order tracking." },
+      { label: "Admin Workspace", value: "Interactive administration panel equipped with real-time revenue analytics charts, coupon handlers, and CSV catalog managers." },
+      { label: "Quality Assurance", value: "Comprehensive coverage using Vitest for unit testing and Playwright for end-to-end browser user flow tests." }
+    ]
+  },
+  {
     headline: "More Projects",
     subheadline: "COMING SOON",
     description: "I am constantly engineering new digital experiences. My upcoming projects continue to push the boundaries of modern web architecture, spatial design, and seamless performance. Check back shortly for more enterprise-grade applications.",
