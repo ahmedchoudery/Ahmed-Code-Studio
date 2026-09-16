@@ -12,8 +12,9 @@ vi.mock('next/font/google', () => ({
   Space_Mono: () => ({ variable: 'space-mono' }),
 }));
 
-vi.mock('next/script', () => ({
-  default: ({ src }: { src: string }) => <script src={src} data-testid="mock-script" />,
+// Mock @vercel/speed-insights
+vi.mock('@vercel/speed-insights/next', () => ({
+  SpeedInsights: () => null,
 }));
 
 describe('RootLayout', () => {

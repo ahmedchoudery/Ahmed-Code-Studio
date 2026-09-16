@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, DM_Sans, JetBrains_Mono, Syne, Space_Mono } from 'next/font/google';
-import Script from 'next/script';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
@@ -130,9 +129,9 @@ export default function RootLayout({
         {/* Google tag (gtag.js) */}
         {gaId && (
           <>
-            <script 
-              async 
-              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} 
+            <script
+              async
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
             />
             <script
               id="google-analytics"
@@ -147,23 +146,6 @@ export default function RootLayout({
             />
           </>
         )}
-        {/* Absolute top of head: Crucial Open Graph Tags for Legacy Crawlers like WhatsApp */}
-        <title>Ahmed Code Studio - Full Stack Web Developer</title>
-        <meta name="description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
-        <meta property="og:title" content="Ahmed Code Studio - Full Stack Web Developer" />
-        <meta property="og:description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
-        <meta property="og:image" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
-        <meta property="og:image:secure_url" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
-        <meta property="og:image:type" content="image/jpeg" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:url" content="https://ahmed-code-studio.vercel.app" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Ahmed Code Studio - Full Stack Web Developer" />
-        <meta name="twitter:description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
-        <meta name="twitter:image" content="https://ahmed-code-studio.vercel.app/og-preview.jpg" />
-
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
