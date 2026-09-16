@@ -30,6 +30,12 @@ export interface Project {
   drawerSpecs?: Spec[];
   seoSchema?: Record<string, unknown>;
   isComingSoon?: boolean;
+  // Case study content model
+  problem?: string;
+  solution?: string;
+  result?: string;
+  techStack?: string[];
+  images?: string[];
 }
 
 export const projects: Project[] = [
@@ -76,7 +82,12 @@ export const projects: Project[] = [
       { label: "Automated Communications", value: "Implements the Twilio API for automated SMS customer confirmations and the Resend API for instant administrator email alerts." },
       { label: "Security & State", value: "Features custom token-based admin authentication, protected API routes, and a synchronized locking mechanism to completely eliminate double-booking scenarios." },
       { label: "Cloud Deployment", value: "Hosted on Vercel utilizing a serverless architecture, optimized with aggressive caching strategies (Cache-Control: immutable) for instantaneous global asset delivery." }
-    ]
+    ],
+    problem: "Falak Hall took bookings by phone and paper calendar. Double-booked dates, missed enquiries, and hours of manual reconciliation were part of running the venue.",
+    solution: "A full-stack booking and venue management platform: a fast, mobile-first booking UI for customers, and a secure admin dashboard with real-time calendar syncing, automatic SMS confirmations (Twilio) and admin email alerts (Resend). A synchronized locking mechanism was built in specifically to eliminate double-booking.",
+    result: "Double-booking scenarios eliminated by the locking mechanism; admin workload cut from manual reconciliation to automated notifications; 98/100 Lighthouse performance score.",
+    techStack: ["Next.js 15", "React 19", "Node.js", "Express.js", "MongoDB", "GSAP", "Twilio", "Resend", "Vercel"],
+    images: ["/images/work/falak-hall-01.png", "/images/work/falak-hall-02.png"]
   },
   {
     headline: "Stop & Shop",
@@ -104,7 +115,12 @@ export const projects: Project[] = [
       { label: "Checkout & Payments", value: "A specialized 2-column local checkout flow with profile autofill, real-time stock deduction, and live order tracking." },
       { label: "Admin Workspace", value: "Interactive administration panel equipped with real-time revenue analytics charts, coupon handlers, and CSV catalog managers." },
       { label: "Quality Assurance", value: "Comprehensive coverage using Vitest for unit testing and Playwright for end-to-end browser user flow tests." }
-    ]
+    ],
+    problem: "A high-end clothing retailer needed a web store that presented products like a fashion house, with payment options that actually work in Pakistan and a real-time view of stock and orders.",
+    solution: "A bespoke full-stack e-commerce platform: a cinematic editorial storefront with GSAP micro-interactions and 3D tilting product cards, a two-column local checkout with profile autofill and real-time stock deduction, and a secure admin dashboard with revenue analytics, coupon handling and CSV catalog management. Built on Next.js 14 API routes with JWT auth in httpOnly cookies, Zod validation, MongoDB and a Redis caching layer.",
+    result: "Real-time stock deduction prevents overselling; Redis-backed stats give the owner instant revenue views instead of manual reports; customers get live order tracking.",
+    techStack: ["Next.js 14", "React 18", "MongoDB (Mongoose)", "Redis", "Zod", "GSAP", "Vitest", "Playwright"],
+    images: ["/images/work/stop-shop-01.png", "/images/work/stop-shop-02.png"]
   },
   {
     headline: "More Projects",
