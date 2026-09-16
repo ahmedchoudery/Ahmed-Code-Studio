@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import { Cormorant_Garamond, DM_Sans, JetBrains_Mono, Syne, Space_Mono } from 'next/font/google';
 import Script from 'next/script';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 
 const cormorantGaramond = Cormorant_Garamond({ 
@@ -168,6 +169,7 @@ export default function RootLayout({
         )}
 
         {children}
+        <SpeedInsights />
       </body>
     </html>
   );
