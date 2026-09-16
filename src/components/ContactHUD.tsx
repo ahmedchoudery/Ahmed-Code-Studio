@@ -2,19 +2,11 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { z } from 'zod';
 import { useHUDStore } from '../store/useHUDStore';
 import { linkedinIcon, mailIcon, whatsappIcon } from '../data/projects';
+import { schema, submitContact, type ContactFieldErrors } from '../lib/contact';
 
 type FormStatus = 'idle' | 'pending' | 'success' | 'error';
-
-const schema = z.object({
-  name:    z.string().min(2,  'Name must be at least 2 characters.'),
-  email:   z.string().email('Please enter a valid email address.'),
-  message: z.string().min(10, 'Message must be at least 10 characters.'),
-});
-
-type FieldErrors = Partial<Record<'name' | 'email' | 'message', string>>;
 
 export function ContactHUD() {
   const isOpen  = useHUDStore(state => state.view === 'CONTACT');
@@ -24,7 +16,7 @@ export function ContactHUD() {
 
   const [status,      setStatus]      = useState<FormStatus>('idle');
   const [serverMsg,   setServerMsg]   = useState('');
-  const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
+  const [fieldErrors, setFieldErrors] = useState<ContactFieldErrors>({});
 
   const whatsappUrl = "https://wa.me/923174307043";
   const gmailUrl    = "mailto:ahmedchoudery30@gmail.com";
@@ -74,23 +66,20 @@ export function ContactHUD() {
     setFieldErrors({});
     setStatus('pending');
 
-    try {
-      const res  = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY,
-          subject: `Portfolio contact from ${parsed.data.name}`,
-          botcheck: '',
-          ...parsed.data,
-        }),
-      });
-      const json = await res.json();
-      if (json.success) { setStatus('success'); setServerMsg('Transmission successful.'); form.reset(); }
-      else              { setStatus('error');   setServerMsg('Link failure. Retry suggested.'); }
-    } catch {
+    const result = await submitContact({
+      name: parsed.data.name,
+      email: parsed.data.email,
+      message: parsed.data.message,
+      botcheck: fd.get('botcheck')?.toString() || '',
+    });
+
+    if (result.ok) {
+      setStatus('success');
+      setServerMsg(result.message);
+      form.reset();
+    } else {
       setStatus('error');
-      setServerMsg('Station offline. Check connection.');
+      setServerMsg(result.message);
     }
   }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import ClientContactForm from '@/components/ClientContactForm';
 
 export const metadata: Metadata = {
   title: 'Web development for small businesses — Ahmed Code Studio',
@@ -306,6 +307,15 @@ export default function ClientLandingPage() {
               </a>
             </article>
           </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="client-contact-section" style={{ marginTop: '5.5rem', paddingTop: '3.5rem', borderTop: '1px solid rgba(255, 255, 255, 0.08)' }}>
+          <h2 className="client-projects-title" style={{ marginBottom: '1rem' }}>Get in Touch</h2>
+          <p style={{ color: 'var(--linen, #C8B298)', fontSize: '1.05rem', marginBottom: '2.5rem', maxWidth: '640px' }}>
+            Have an e-commerce or booking project in mind? Submit your requirements below for a consultation, or connect directly on WhatsApp.
+          </p>
+          <ClientContactForm />
         </section>
 
         <footer className="client-footer">
