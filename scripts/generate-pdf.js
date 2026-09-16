@@ -330,7 +330,7 @@ const htmlTemplate = `
         <div class="skills-category-container">
           <div class="skill-card">
             <h4>Frontend Engineering</h4>
-            <p>React 19, Next.js 15 (App Router), Three.js (WebGL 3D), GSAP (Spatial Animation), Framer Motion, Vanilla CSS, Tailwind CSS, Responsive Web Design</p>
+            <p>React 19, Next.js 16 (App Router, Static Export), GSAP (Spatial Animation), Zustand, Zod, Vanilla CSS, Responsive Web Design</p>
           </div>
           <div class="skill-card">
             <h4>Backend & Databases</h4>
@@ -366,7 +366,7 @@ const htmlTemplate = `
             <li><strong>Optimized Performance:</strong> Accomplished a near-perfect <strong>98/100 Lighthouse score</strong> utilizing Next.js Server Components and advanced asset-caching techniques.</li>
             <li><strong>Safe Transactional State:</strong> Developed a custom backend booking engine with synchronized transactional locks to eliminate venue double-booking.</li>
             <li><strong>Automated Communications:</strong> Integrated the Twilio API for automated client SMS workflows and the Resend API for immediate admin email delivery.</li>
-            <li><strong>Cinematic UI:</strong> Designed a responsive, spatial "glassmorphism" layout integrated with high-performance GSAP micro-animations running at 60fps.</li>
+            <li><strong>Cinematic UI:</strong> Designed a responsive, premium spatial layout integrated with high-performance GSAP micro-animations running at 60fps.</li>
           </ul>
           <div class="tag-container">
             <span class="tag">Next.js 15</span>
@@ -384,23 +384,27 @@ const htmlTemplate = `
         <div class="experience-item" style="margin-top: 15px;">
           <div class="exp-header">
             <div class="exp-role-company">
-              <h3>Ahmed Code Studio <span>— High-Fidelity 3D Portfolio Platform</span></h3>
+              <h3>Ahmed Code Studio <span>— Dual-Audience Static Portfolio Platform</span></h3>
             </div>
             <div class="exp-date-location">Active Platform</div>
           </div>
           <p class="exp-description">
-            Conceived and launched a bespoke cinematic developer portfolio using Next.js and React, showing an interactive, glassmorphic visual playground.
+            Architected and shipped a dual-audience static portfolio: a calm, conversion-focused client landing with SEO case studies, and a separate interactive HUD experience for recruiters — with strict module isolation enforced between the two audiences.
           </p>
           <ul class="bullet-list">
-            <li><strong>Immersive 3D Experience:</strong> Programmed lightweight 3D elements utilizing Three.js and @react-three/fiber with zero-jitter responsive controls.</li>
-            <li><strong>Responsive Visuals:</strong> Implemented Vanilla CSS glassmorphic cards, custom keyframe scroll-triggering, and premium dark/light spatial layouts.</li>
+            <li><strong>Full Static Export:</strong> Configured Next.js <code>output: 'export'</code> — all 7 routes pre-rendered to static HTML at build time; zero client-side data fetching for case study content.</li>
+            <li><strong>Route Isolation Guard:</strong> Vitest regression test recursively audits every file under <code>/client</code> routes and asserts zero imports of HUD-specific modules, permanently preventing audience leakage.</li>
+            <li><strong>Dynamic Case Studies via <code>generateStaticParams</code>:</strong> Statically generated <code>/client/work/[slug]</code> pages for each project with unique <code>generateMetadata</code> and canonical URLs per route.</li>
+            <li><strong>Shared Contact Layer:</strong> Centralized Zod-validated Web3Forms submission helper (<code>src/lib/contact.ts</code>) consumed by both the HUD modal and the static client form — no logic duplication across audiences.</li>
+            <li><strong>Test Coverage:</strong> 76 unit tests across route isolation, contact submission, and component rendering; mocked <code>canvas</code>, <code>ResizeObserver</code>, and <code>matchMedia</code> for jsdom compatibility.</li>
           </ul>
           <div class="tag-container">
-            <span class="tag">Next.js</span>
-            <span class="tag">Three.js</span>
+            <span class="tag">Next.js 16</span>
+            <span class="tag">React 19</span>
+            <span class="tag">TypeScript</span>
             <span class="tag">GSAP</span>
-            <span class="tag">React Three Fiber</span>
-            <span class="tag">Vanilla CSS</span>
+            <span class="tag">Zustand</span>
+            <span class="tag">Zod</span>
             <span class="tag">Vitest</span>
           </div>
         </div>
