@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import RootLayout from '../../app/layout';
 
 // Mock Next.js specialized components
@@ -17,11 +17,16 @@ vi.mock('next/script', () => ({
 }));
 
 describe('RootLayout', () => {
+  beforeEach(() => {
+    document.querySelectorAll('script[src*="googletagmanager"]').forEach((s) => s.remove());
+    document.querySelectorAll('#google-analytics').forEach((s) => s.remove());
+  });
+
   it('renders children and base structure', () => {
     // Mock env variable for conditional GA testing
     process.env.NEXT_PUBLIC_GA_ID = 'G-TEST';
 
-    const { container } = render(
+    render(
       <RootLayout>
         <div data-testid="child">CHILD_CONTENT</div>
       </RootLayout>
@@ -31,9 +36,9 @@ describe('RootLayout', () => {
     expect(screen.getByText('Skip to content')).toBeInTheDocument();
     
     // Check GA scripts are rendered when ID exists
-    const scripts = screen.getAllByTestId('mock-script');
-    expect(scripts.length).toBeGreaterThan(0);
-    expect(scripts[0]).toHaveAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-TEST');
+    const gaScript = document.querySelector('script[src*="googletagmanager"]');
+    expect(gaScript).toBeInTheDocument();
+    expect(gaScript).toHaveAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=G-TEST');
   });
 
   it('does not render GA scripts when ID is missing', () => {
@@ -46,7 +51,8 @@ describe('RootLayout', () => {
       </RootLayout>
     );
 
-    expect(screen.queryByTestId('mock-script')).not.toBeInTheDocument();
+    const gaScript = document.querySelector('script[src*="googletagmanager"]');
+    expect(gaScript).not.toBeInTheDocument();
 
     // Restore env
     process.env.NEXT_PUBLIC_GA_ID = originalEnv;

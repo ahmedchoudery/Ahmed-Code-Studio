@@ -121,9 +121,32 @@ export default function RootLayout({
     }
   };
 
+  const rawGaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = rawGaId === 'G-XXXXXXXXXX' ? 'G-J2628ZQMWG' : rawGaId;
+
   return (
     <html lang="en" className={`${cormorantGaramond.variable} ${dmSans.variable} ${jetbrainsMono.variable} ${syne.variable} ${spaceMono.variable}`} suppressHydrationWarning>
       <head>
+        {/* Google tag (gtag.js) */}
+        {gaId && (
+          <>
+            <script 
+              async 
+              src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} 
+            />
+            <script
+              id="google-analytics"
+              dangerouslySetInnerHTML={{
+                __html: `
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${gaId}');
+                `,
+              }}
+            />
+          </>
+        )}
         {/* Absolute top of head: Crucial Open Graph Tags for Legacy Crawlers like WhatsApp */}
         <title>Ahmed Code Studio - Full Stack Web Developer</title>
         <meta name="description" content="Ahmed Code Studio - building premium web experiences with React, Next.js, Node.js, Three.js and GSAP. Full Stack Developer based in Pakistan." />
@@ -150,23 +173,6 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <a href="#hero" className="skip-link">Skip to content</a>
-        {process.env.NEXT_PUBLIC_GA_ID && (
-          <>
-            {/* Google tag (gtag.js) */}
-            <Script 
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-              strategy="afterInteractive" 
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-              `}
-            </Script>
-          </>
-        )}
 
         {children}
         <SpeedInsights />
