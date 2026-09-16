@@ -1,62 +1,111 @@
-# Ahmed Code Studio — Cinematic HUD Portfolio
+# Ahmed Code Studio
 
-A high-performance, cinematic spatial portfolio website built for **Muhammad Ahmed Raza**, a Full Stack Web Developer. The application leverages a cutting-edge modern stack to deliver a premium, dark glassmorphism aesthetic with 60fps micro-animations, 3D interactive particle backgrounds, and a customizable Heads-Up Display (HUD) state-management layer.
-
----
-
-## Table of Contents
-
-- [Key Features](#key-features)
-- [Tech Stack](#tech-stack)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Architecture & Design Systems](#architecture--design-systems)
-  - [Directory Structure](#directory-structure)
-  - [HUD State Flow & Lifecycles](#hud-state-flow--lifecycles)
-  - [Interactive 3D WebGL System](#interactive-3d-webgl-system)
-  - [Form Validation & Email Pipelines](#form-validation--email-pipelines)
-- [Environment Variables](#environment-variables)
-- [Available Scripts](#available-scripts)
-- [Testing Infrastructure](#testing-infrastructure)
-  - [Mocks & Muted Canvas Contexts](#mocks--muted-canvas-contexts)
-  - [Executing Tests](#executing-tests)
-- [Deployment](#deployment)
-  - [Deploying to Vercel (Recommended)](#deploying-to-vercel-recommended)
-  - [Manual Deployments](#manual-deployments)
-- [Troubleshooting & Gotchas](#troubleshooting--gotchas)
+A dual-audience static portfolio website for **Muhammad Ahmed Raza**, a Full-Stack Web Developer based in Gujrat, Pakistan. The site is engineered to serve two distinct user intents with zero friction: the root route (`/`) provides a lightweight static audience selector; `/client` delivers a calm, content-first landing page with structured case studies and an inline project inquiry form; and `/recruiter` hosts an interactive, cinematic Heads-Up Display (HUD) terminal showcasing technical specifications, project architectures, and skills data.
 
 ---
 
-## Key Features
+## Routes
 
-- **Spatial Glassmorphism HUD**: An interactive, weightless Heads-Up Display UI inspired by technical blueprints and spacecraft dashboards.
-- **WebGL Particle Atmosphere**: Implements interactive 3D particle dust and light fields that react dynamically to cursor coordinates and gyroscope parameters.
-- **Precision Framerate Motion**: Utilizes GSAP (GreenSock Animation Platform) and Framer Motion to deliver seamless, hardware-accelerated 60fps micro-animations.
-- **Stateless Serverless Contact**: Employs a secure Zod-validated input schema backed by Web3Forms for immediate serverless feedback.
-- **Adherence to Next.js 15 & React 19**: Strictly follows the modern App Router paradigm, featuring Server-Side Rendering (SSR) alongside dynamic client hydration wrappers.
+| Route | Audience & Purpose | Rendering |
+| :--- | :--- | :--- |
+| `/` | **Audience Selector**: Clean, lightweight portal directing visitors to project hiring or technical recruiter views. | Static HTML |
+| `/client` | **Client Services**: Calm, vertical-scrolling landing page with value proposition, case studies, and contact form. | Static HTML |
+| `/client/work/falak-hall-events` | **Case Study**: Full-stack booking and venue management platform case study. | Static HTML (`generateStaticParams`) |
+| `/client/work/stop-shop` | **Case Study**: Bespoke editorial e-commerce platform with real-time stock deduction. | Static HTML (`generateStaticParams`) |
+| `/recruiter` | **Engineering HUD**: Cinematic Heads-Up Display terminal with project specs, skills matrix, and interactive drawer. | Static HTML + Client Hydration |
 
 ---
 
 ## Tech Stack
 
-- **Framework**: [Next.js 15.0.3](https://nextjs.org/) (App Router)
-- **Language**: [TypeScript](https://www.typescriptlang.org/) (Strict Mode)
-- **Runtime Environment**: [React 19](https://react.dev/)
-- **State Engine**: [Zustand](https://github.com/pmndrs/zustand)
-- **3D Graphics**: [Three.js](https://threejs.org/) (`@react-three/fiber` & `@react-three/drei`)
-- **Animations**: [GSAP](https://greensock.com/gsap/) (GreenSock) & [Framer Motion](https://www.framer.com/motion/)
-- **Validation**: [Zod](https://zod.dev/)
-- **Linter**: ESLint (Next.js config)
-- **Test Engine**: [Vitest](https://vitest.dev/) & [React Testing Library](https://testing-library.com/)
-- **Infrastructure Host**: [Vercel](https://vercel.com/)
+The project runs on a modern, strictly typed TypeScript stack compiled as a full static export (`output: 'export'` in `next.config.mjs`) deployed globally on [Vercel](https://vercel.com/):
+
+- **Framework**: [Next.js](https://nextjs.org/) `^16.2.6` (App Router, Static HTML Export)
+- **UI Library**: [React](https://react.dev/) `^19.1.0` & [React DOM](https://react.dev/) `^19.1.0`
+- **Language**: [TypeScript](https://www.typescriptlang.org/) `^5.6.3` (Strict Mode)
+- **State Management**: [Zustand](https://github.com/pmndrs/zustand) `^5.0.12`
+- **Animations**: [GSAP](https://greensock.com/gsap/) `^3.14.2`
+- **Schema Validation**: [Zod](https://zod.dev/) `^4.3.6`
+- **Sanitization**: [DOMPurify](https://github.com/cure53/DOMPurify) `^3.4.0`
+- **Analytics & Performance**: [@vercel/speed-insights](https://vercel.com/docs/speed-insights) `^2.0.0`
+- **Testing**: [Vitest](https://vitest.dev/) `^4.1.4`, [@testing-library/react](https://testing-library.com/) `^16.3.2`, [JSDOM](https://github.com/jsdom/jsdom) `^29.0.2`
 
 ---
 
-## Prerequisites
+## Architecture
 
-Ensure you have the following installed on your machine:
-- **Node.js**: `v20.x.x` or higher (LTS recommended)
-- **Package Manager**: `npm` (v10+) or `pnpm` (recommended for zero-overhead builds)
+The project maintains strict separation between client-facing static content and recruiter-facing HUD components:
+
+```text
+├── src/
+│   ├── app/
+│   │   ├── page.tsx                    # Lightweight static audience selector (/)
+│   │   ├── layout.tsx                  # Root layout with fonts, metadata API & GA tag
+│   │   ├── globals.css                 # Color tokens, typography, and scoped HUD styles
+│   │   ├── not-found.tsx               # Static 404 handler
+│   │   ├── client/
+│   │   │   ├── page.tsx                # Calm client landing page (/client)
+│   │   │   └── work/[slug]/
+│   │   │       └── page.tsx            # Static case study routes (/client/work/[slug])
+│   │   └── recruiter/
+│   │       └── page.tsx                # Interactive HUD portfolio (/recruiter)
+│   ├── components/
+│   │   ├── ClientContactForm.tsx       # Plain, non-modal client contact form
+│   │   ├── ClientHome.tsx              # Core interactive HUD container
+│   │   ├── ContactHUD.tsx              # Modal HUD contact interface
+│   │   ├── BackgroundSystem.tsx        # HUD ambient background renderer (public/bg_v13.html)
+│   │   ├── ProjectDetailDrawer.tsx     # HUD technical specifications drawer
+│   │   ├── ProjectDisplay.tsx          # HUD carousel display
+│   │   ├── TechnicalSpecs.tsx          # HUD technical skills panel
+│   │   └── TopNav.tsx                  # HUD navigation controls
+│   ├── data/
+│   │   └── projects.ts                 # Portfolio records with Problem/Solution/Result content model
+│   ├── lib/
+│   │   └── contact.ts                  # Shared Web3Forms submission logic and Zod validation
+│   ├── store/
+│   │   └── useHUDStore.ts              # Zustand store for HUD views and navigation
+│   └── tests/
+│       ├── setup.ts                    # Test environment setup and browser API mocks
+│       ├── lib/contact.test.ts         # Unit tests for contact submission helper
+│       ├── routes/clientIsolation.test.ts # Route isolation guard test
+│       ├── app/                        # Route and page unit tests
+│       └── components/                 # Component unit tests
+├── public/                             # Static assets, sitemap.xml, robots.txt, bg_v13.html
+├── next.config.mjs                     # Static export configuration (output: 'export')
+├── vitest.config.ts                    # Vitest configuration with path aliases
+├── tsconfig.json                       # Strict TypeScript settings
+└── package.json                        # Scripts and dependencies
+```
+
+### Route Isolation & Guard Testing
+
+To ensure that heavy HUD dependencies (such as HUD modals, canvas elements, or animation controllers) never leak into client routes, an automated isolation guard test runs in CI:
+
+- **[src/tests/routes/clientIsolation.test.ts](src/tests/routes/clientIsolation.test.ts)**: Recursively inspects all files under `src/app/client/` and asserts zero imports or references to HUD-specific modules (`BackgroundSystem`, `ClientHome`, `TopNav`, `ProjectDisplay`, `TechnicalSpecs`, `ProjectDetailDrawer`, `ContactHUD`, `HUDSystemAlert`, `HUDErrorBoundary`, `useHUDStore`, etc.).
+
+### Shared Contact Submission
+
+Both the recruiter modal (`ContactHUD.tsx`) and the client landing page (`ClientContactForm.tsx`) share a centralized submission layer in **[src/lib/contact.ts](src/lib/contact.ts)**:
+- Uses a unified Zod schema (`name`, `email`, `message`, optional `botcheck` honeypot).
+- Submits asynchronously to Web3Forms.
+- Returns normalized responses (`{ ok: boolean, message: string, fieldErrors?: ... }`).
+
+---
+
+## Environment Variables
+
+Configure the following variables in `.env.local` for local development or in the Vercel project dashboard:
+
+```env
+# Client-side Web3Forms Access Key (Required for contact form submissions)
+NEXT_PUBLIC_WEB3FORMS_KEY=your-web3forms-access-key
+
+# Optional: Google Analytics 4 Measurement ID
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
+
+# Optional: Canonical Deployment Domain
+NEXT_PUBLIC_SITE_URL=https://ahmed-code-studio.vercel.app
+```
 
 ---
 
@@ -75,222 +124,58 @@ cd Ahmed-Code-Studio
 npm install
 ```
 
-### 3. Setup Environment Configuration
-
-Create a `.env.local` file in the project's root folder:
+### 3. Setup Local Environment
 
 ```bash
 cp .env.example .env.local
 ```
 
-Configure the following variables inside `.env.local`:
+Populate `NEXT_PUBLIC_WEB3FORMS_KEY` with your Web3Forms access key.
 
-| Variable | Requirement | Description | Example |
-| :--- | :--- | :--- | :--- |
-| `NEXT_PUBLIC_WEB3FORMS_KEY` | **Required** | The API access key from Web3Forms for contact submissions. | `a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6` |
-| `NEXT_PUBLIC_GA_ID` | *Optional* | Google Analytics 4 measurement ID for traffic analytics. | `G-XXXXXXXXXX` |
-| `NEXT_PUBLIC_SITE_URL` | *Optional* | The canonical URL of your deployed application. | `https://ahmed-code-studio.vercel.app` |
-| `NEXT_PUBLIC_OG_IMAGE` | *Optional* | OpenGraph standard image preview for social share cards. | `https://ahmed-code-studio.vercel.app/og-preview.jpg` |
-
-### 4. Boot Up the Local Environment
-
-Start the Next.js development server:
+### 4. Run Development Server
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to view your spatial cinematic portfolio running locally with hot-module reloading.
-
----
-
-## Architecture & Design Systems
-
-### Directory Structure
-
-```text
-├── src/
-│   ├── app/                 # Next.js 15 App Router pages, layouts, and configurations
-│   │   ├── globals.css      # Custom UI theme variables, HSL color tokens, typography & animations
-│   │   ├── layout.tsx       # Root layout initializing global metadata, viewport systems, and fonts
-│   │   └── page.tsx         # Main entry point importing the Client Home container
-│   ├── components/          # React components representing specific parts of the HUD
-│   │   ├── BackgroundSystem.tsx    # Three.js 3D WebGL Canvas particle logic and event handling
-│   │   ├── ClientHome.tsx          # Client-side core shell, scroll listeners, and keybindings
-│   │   ├── ContactHUD.tsx          # Zod-validated serverless Web3Forms contact form panel
-│   │   ├── HUDErrorBoundary.tsx    # Secure fallback rendering for isolated component failures
-│   │   ├── HUDSystemAlert.tsx      # System notifications and popups using Zustand alerts
-│   │   ├── ProjectDetailDrawer.tsx # Slide-out overlay presenting technical case study specifications
-│   │   ├── ProjectDisplay.tsx      # Carousel views for projects with animated entrance sequences
-│   │   ├── TechnicalSpecs.tsx      # Side panel displaying custom dynamic skill meters
-│   │   └── TopNav.tsx              # Interactive status bar with navigation indicators
-│   ├── data/                # Data management
-│   │   └── projects.ts      # Core portfolio records, icons, schemas, and skills data
-│   ├── hooks/               # Custom React Hooks
-│   │   ├── useMagneticHUD.ts       # Magnet cursor calculations for hover interactions
-│   │   └── useTextDecodeEffect.ts  # Matrix-style cipher text-decoding animations
-│   ├── store/               # Centralized State Management
-│   │   └── useHUDStore.ts   # Zustand stores tracking view transitions, active indexes, and transitions
-│   └── tests/               # Full verification suite mirroring source layout
-│       ├── setup.ts         # Vitest setup configuring JSDOM, GSAP and ResizeObserver mocks
-│       ├── components/      # Unit and integration assertions for HUD components
-│       └── store/           # Zustand state transition test cases
-├── public/                  # Static assets (fallback graphics, sitemaps, robots.txt)
-├── next.config.mjs          # Next.js bundle optimizations and production webpack configuration
-├── vitest.config.ts         # Vitest config defining testing environments and path aliases
-├── tsconfig.json            # Strict TypeScript configuration
-└── package.json             # App configurations, dependencies, and execution scripts
-```
-
-### HUD State Flow & Lifecycles
-
-State transitions are managed centrally using a lightweight **Zustand store** (`useHUDStore.ts`). Instead of relying on traditional route changes that break high-fidelity animations, the interface behaves as a spatial Single Page Application.
-
-```
-                    ┌──────────────┐
-                    │  MAIN VIEW   │
-                    └──────┬───────┘
-                           │
-             ┌─────────────┴─────────────┐
-             ▼                           ▼
- ┌───────────────────────┐   ┌───────────────────────┐
- │    PROJECT_DETAILS    │   │      CONTACT HUD      │
- │  (Case study drawer)  │   │  (Interactive panel)  │
- └───────────────────────┘   └───────────────────────┘
-```
-
-When a transition occurs:
-1. `useHUDStore` toggles the active view (e.g., `CONTACT` or `PROJECT_DETAILS`).
-2. GSAP context registers the event and executes exit animations on active components.
-3. Once elements exit, React's dynamic component resolves, rendering the incoming view.
-4. The incoming view triggers entrance animations using target refs.
-
-### Interactive 3D WebGL System
-
-The interactive visual atmosphere is rendered inside `BackgroundSystem.tsx` using **Three.js** under React Three Fiber (`@react-three/fiber`). 
-
-- **Optimized Particle System**: Over 1,000 custom-shaded vertices are loaded into a `BufferGeometry` instance rather than individual mesh nodes. This ensures single-pass rendering (instanced drawing), keeping overhead extremely low on low-end mobile devices.
-- **Parallax Physics**: The particle group acts dynamically to mouse coordinates. On desktop, mouse coordinates compute relative velocity offsets to create a physical depth effect.
-- **Device Parallax**: Integrates mobile device orientation values (pitch & roll), transferring gyroscope movements to the particle fields for immersive physical depth on mobile browsers.
-
-### Form Validation & Email Pipelines
-
-The contact form uses a combination of client-side validation and serverless form actions:
-
-1. **Client-side schemas (Zod)**: Input values are structured using `z.object({ name: z.string().min(2), email: z.string().email(), message: z.string().min(10) })`.
-2. **Immediate validation checks**: Validation errors trigger status alerts inside `HUDSystemAlert.tsx` without resetting inputs.
-3. **Web3Forms Transmission**: Confirmed payloads are posted asynchronously to Web3Forms API endpoints, avoiding the need for heavy custom backend route management.
-
----
-
-## Environment Variables
-
-The application operates securely on serverless systems using public environment prefixes. Add these in Vercel or your local `.env.local` file:
-
-```env
-# Web3Forms Secret Access Key (Acquire from web3forms.com)
-NEXT_PUBLIC_WEB3FORMS_KEY=a1b2c3d4-e5f6-7a8b-9c0d-e1f2a3b4c5d6
-
-# Canonical Deployment Domain
-NEXT_PUBLIC_SITE_URL=https://ahmed-code-studio.vercel.app
-
-# OpenGraph Social Share Preview Image
-NEXT_PUBLIC_OG_IMAGE=https://ahmed-code-studio.vercel.app/og-preview.jpg
-
-# Google Analytics Measurement Identifier
-NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
-```
+Visit [http://localhost:3000](http://localhost:3000) to view the application.
 
 ---
 
 ## Available Scripts
 
-Use the following commands inside the project's root folder:
+The following scripts are defined in `package.json`:
 
-| Command | Action | Goal |
+| Script | Command | Purpose |
 | :--- | :--- | :--- |
-| `npm run dev` | `next dev` | Start the dev server on port `3000` with hot-reloading. |
-| `npm run build` | `next build` | Compile static production assets and serverless configurations. |
-| `npm run start` | `next start` | Launch the built production server locally. |
-| `npm run lint` | `next lint` | Validate codebase syntax against strict ESLint rules. |
-| `npm run test` | `vitest` | Run unit and integration tests headlessly. |
-| `npm run test:ui` | `vitest --ui` | Run Vitest with a graphical web-based test dashboard. |
-| `npm run coverage` | `vitest run --coverage` | Generate complete coverage directories in `coverage/`. |
-| `npm run type-check` | `tsc --noEmit` | Validate type soundness across all source code. |
+| `npm run dev` | `next dev -p 3000 -H 0.0.0.0` | Start local development server with hot-module reloading. |
+| `npm run build` | `next build` | Compile the full static export into the `out/` directory. |
+| `npm run start` | `next start` | Start production server (used for Node preview if applicable). |
+| `npm run lint` | `next lint` | Run ESLint checks across the codebase. |
+| `npm run test` | `vitest run` | Run all unit and integration tests headlessly. |
+| `npm run test:ui` | `vitest --ui` | Run Vitest with a browser-based visual test UI. |
+| `npm run coverage` | `vitest run --coverage` | Generate code coverage reports. |
+| `npm run type-check` | `tsc --noEmit` | Validate TypeScript types without emitting artifacts. |
 
 ---
 
-## Testing Infrastructure
+## Testing
 
-The application has a robust, clean test suite configured under Vitest, React Testing Library, and JSDOM, asserting custom store transitions, component integrity, and validation behaviors.
-
-### Mocks & Muted Canvas Contexts
-
-To run tests without standard browser runtime failures:
-- **WebGL & Canvas Mocks**: `BackgroundSystem.tsx` requires a WebGL context, which does not exist inside virtual JSDOM systems. The test suite uses custom mock setups in `src/tests/setup.ts` to stub `@react-three/fiber` canvas blocks, allowing specs to run smoothly.
-- **ResizeObserver / GSAP Hooks**: Custom global stubs are injected for browser APIs (`window.ResizeObserver`, `window.matchMedia`), and GSAP animations are automatically bypassed by setting global GSAP speeds to immediate completion times (`gsap.globalTimeline.timeScale(100)`).
-
-### Executing Tests
+The testing suite uses Vitest and React Testing Library:
 
 ```bash
-# Run tests headlessly
-npm run test
-
-# Launch visual test suite
-npm run test:ui
-
-# Verify code coverage (Aiming above 70%)
-npm run coverage
+# Run the complete test suite
+npx vitest run
 ```
+
+- **Canvas & Browser API Mocks**: `src/tests/setup.ts` stubs browser APIs unavailable in JSDOM (such as `ResizeObserver`, `matchMedia`, and canvas contexts required by HUD background components).
+- **Route Isolation**: Ensures client routes maintain pure semantic HTML and never bundle interactive HUD logic.
+- **Form Validation**: Tests valid submissions, empty payload rejections, honeypot bot mitigation, and network error handling.
 
 ---
 
 ## Deployment
 
-The application is fully optimized for zero-configuration deployments on **Vercel**.
+The portfolio is built as a static site using Next.js static export (`output: 'export'`). 
 
-### Deploying to Vercel (Recommended)
-
-1. Push your updated code to your GitHub repository.
-2. Visit the [Vercel Dashboard](https://vercel.com/) and click **Add New...** > **Project**.
-3. Import your repository: `Ahmed-Code-Studio`.
-4. In the **Environment Variables** panel, add `NEXT_PUBLIC_WEB3FORMS_KEY` with your actual Web3Forms API key.
-5. Click **Deploy**. Vercel will build your application, generate static paths, and serve your pages over a global, edge-cached CDN.
-
-### Manual Deployments
-
-To build and run the application manually on a private server (VPS or Docker container):
-
-```bash
-# 1. Pull the absolute source code
-git pull origin main
-
-# 2. Install pristine dependencies
-npm ci
-
-# 3. Compile Next.js production code
-npm run build
-
-# 4. Start the server daemon
-npm run start
-```
-
----
-
-## Troubleshooting & Gotchas
-
-### Hydration Warnings
-**Issue**: Browser logs display `Extra attributes from server: style...` or warnings about canvas overlays.
-**Solution**: React Three Fiber injects absolute styles to standard overlay elements dynamically. This is safe to ignore, but you can prevent warnings by declaring `suppressHydrationWarning` on elements heavily altered by dynamic hooks.
-
-### WebGL Canvas Rendering Failures
-**Issue**: The background disappears or prints canvas driver warnings.
-**Solution**: Old mobile devices may not support full WebGL2 instanced buffer attributes. The codebase is configured to detect rendering contexts; if WebGL initialization fails, it falls back to a clean, CSS-based glassmorphism space background without blocking the core page layout.
-
-### GSAP Animation Conflicts during Fast Transition
-**Issue**: UI elements freeze halfway or display styling bugs when clicking navigation buttons rapidly.
-**Solution**: Fast clicks can trigger a new animation transition before previous timelines finish. We use `gsap.context()` in components, which automatically handles tearing down and cleaning up previous timelines when props or states change. Always use `gsap.context` inside React effects to prevent layout memory leaks!
-
----
-
-*Designed and engineered by Muhammad Ahmed Raza. Built for high-performance visual fidelity.*
+Running `npm run build` pre-renders all pages and assets directly into the `out/` folder. The production deployment is hosted on **Vercel**, configured to automatically deploy the `main` branch upon push.
