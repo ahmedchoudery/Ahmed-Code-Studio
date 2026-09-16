@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import BackgroundSystem from '@/components/BackgroundSystem';
-
 export default function NotFound() {
   return (
     <main className="not-found-container" style={{ 
@@ -13,9 +11,6 @@ export default function NotFound() {
       overflow: 'hidden',
       backgroundColor: '#050403'
     }}>
-      {/* Background stays active for immersion */}
-      <BackgroundSystem />
-
       <div className="not-found-content glassmorphism" style={{
         padding: '3rem',
         textAlign: 'center',

@@ -7,6 +7,12 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://ahmed-code-studio.vercel.app/client</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://ahmed-code-studio.vercel.app/client/work/falak-hall-events</loc>
     <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>

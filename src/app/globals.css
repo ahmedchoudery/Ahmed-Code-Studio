@@ -123,12 +123,15 @@ html, body {
   background: var(--ink);
   color: var(--ghost);
   font-family: var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body:has(#app) {
   overflow: hidden !important;
   overscroll-behavior: none !important;
   height: 100vh;
   width: 100vw;
   position: fixed;
-  -webkit-font-smoothing: antialiased;
   touch-action: none;
 }
 
