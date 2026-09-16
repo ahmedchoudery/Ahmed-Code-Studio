@@ -151,6 +151,7 @@ export default function RootLayout({
         <a href="#hero" className="skip-link">Skip to content</a>
         {process.env.NEXT_PUBLIC_GA_ID && (
           <>
+            {/* Google tag (gtag.js) */}
             <Script 
               src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
               strategy="afterInteractive" 
